@@ -19,12 +19,13 @@ namespace AutoCamera
 
             FirefoxProfile profile = new FirefoxProfile(cfg("profile_dir"));
             FirefoxDriver driver = new FirefoxDriver(profile);
+            driver.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(10));
             driver.Url = cfg("url");
             driver.Navigate();
             driver.FindElementById("loginUserName").SendKeys(cfg("username"));
             driver.FindElementById("loginPassword").SendKeys(cfg("password"));
             driver.FindElementById("lalogin").Click();
-
+           
             var frame = driver.FindElementById("ContentFrame");
             driver.SwitchTo().Frame(frame);
             driver.FindElementById("play").Click();
